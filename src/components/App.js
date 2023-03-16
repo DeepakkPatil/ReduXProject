@@ -34,6 +34,16 @@ class App extends React.Component {
 
   }
 
+  isMovieFav=(movie)=>{
+    const { store }= this.props ;
+    const {favourites}= store.getState() ;
+    const index=favourites.indexOf(movie) ;
+    if(index===-1)
+      return false ;
+     return true ;
+  }
+
+showMovies=()=>{}
 
   render (){
 
@@ -44,13 +54,18 @@ class App extends React.Component {
       <Nav />
       <div className="main">
           <div className="tabs">
-            <div className="tab">Movies</div>
+            <div className="tab" role='button' onClick={this.showMovies} >Movies</div>
             <div className="tab">Favourites</div>
           </div>
           <div className="list">
               { list.map((movie,index)=>{
                 return (
-                  <MovieCard movie={movie} key={`movie-${index}`} />
+                  <MovieCard 
+                  movie={movie} 
+                  key={`movie-${index}`} 
+                  dispatch={this.props.store.dispatch } 
+                  isMovieFav={this.isMovieFav(movie)}
+                  />
                 )
               })}
           </div>  
