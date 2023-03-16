@@ -30,14 +30,16 @@ class App extends React.Component {
     // the above method is lame aacha use kro 
     store.dispatch(addMovies(data)) ;
 
-  console.log(store.getState())
+ 
 
   }
 
 
   render (){
 
-     const data= this.props.store.getState() ;
+    //  const data= this.props.store.getState() ; now state has list and favourites 
+    const { list }= this.props.store.getState() ;
+      console.log("render", this.props.store.getState())
     return (<div className="App">
       <Nav />
       <div className="main">
@@ -46,7 +48,7 @@ class App extends React.Component {
             <div className="tab">Favourites</div>
           </div>
           <div className="list">
-              { data.map((movie,index)=>{
+              { list.map((movie,index)=>{
                 return (
                   <MovieCard movie={movie} key={`movie-${index}`} />
                 )
