@@ -1,4 +1,5 @@
 // make pure 
+import { combineReducers } from "redux";
 import { ADD_MOVIES ,ADD_FAVOURITES, REMOVE_FAVOURITES ,SET_SHOW_FAV } from "../actions";
 
 const initialMovies ={
@@ -9,7 +10,7 @@ const initialMovies ={
 }
 
 
-export default  function movies(state=initialMovies,action){
+export  function movies(state=initialMovies,action){
 
 /*if(action.type===ADD_MOVIES)
 {
@@ -66,3 +67,35 @@ switch (action.type) {
 
 }
 
+// reducer for search
+const initialSearchState = { result: {} };
+
+export const search =(state=initialSearchState,action)=>{
+
+
+return state ;
+}
+
+
+//ROOT REDUCER : ( what we wrote on our own)
+
+// const intialRootState = { 
+//     movies: initialMovies ,
+//     search: initialSearchState
+//  };
+// export default  function rootReducer(state=intialRootState,action)
+// {
+//     return {
+//         movies : movies(state.movies,action) , // reducer for movies
+//         search: search(state.search,action)     // reducer for search
+//     }
+// }
+
+
+
+// Redux provides us with combine Reducer methdo inbuit
+export default combineReducers({
+    movies: movies ,
+    search: search
+
+})

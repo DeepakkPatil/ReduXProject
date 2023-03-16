@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import { createStore } from 'redux';
-import movies from './reducers';
+import rootReducer from './reducers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const store =createStore(movies) ; // we pass reducer to store
+const store =createStore(rootReducer) ; // we pass reducer to store
 
 // console.log("store",store.getState()) // initial state show krega
 

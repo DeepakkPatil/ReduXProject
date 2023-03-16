@@ -22,7 +22,7 @@ class App extends React.Component {
     })
     
     // dispatch the action  
-    // store.dispatch({
+    // store.dispatch({ 
     //   type: 'ADD_MOVIES', 
     //   movies: data
     // })
@@ -36,7 +36,8 @@ class App extends React.Component {
 
   isMovieFav=(movie)=>{
     const { store }= this.props ;
-    const {favourites}= store.getState() ;
+    const {movies}= store.getState() ;
+    const {favourites} = movies ;
     const index=favourites.indexOf(movie) ;
     if(index===-1)
       return false ;
@@ -49,8 +50,8 @@ onChangeTab=(val)=>{
 
   render (){
 
-    //  const data= this.props.store.getState() ; now state has list and favourites 
-    const { list ,favourites ,showFav }= this.props.store.getState() ;
+    const { movies, search }= this.props.store.getState() ;
+    const { list ,favourites ,showFav }= movies ;
 
     const displayMovies= showFav? favourites:list ;
        console.log("render", this.props.store.getState())
