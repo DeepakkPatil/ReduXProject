@@ -10,6 +10,7 @@
 export const ADD_MOVIES = 'ADD_MOVIES' ;
 export const ADD_FAVOURITES = 'ADD_FAVOURITES' ;
 export const REMOVE_FAVOURITES= 'REMOVE_FAVOURITES' ;
+export const SET_SHOW_FAV= 'SET_SHOW_FAV' ;
 
 
 // action Creators 
@@ -29,5 +30,11 @@ export const removeFavourites= (data)=>{
     return {
         type: REMOVE_FAVOURITES ,
         movie:data
+    }
+}
+export const setsShowFav= (val)=>{
+    return {
+        type: SET_SHOW_FAV ,
+        val
     }
 }

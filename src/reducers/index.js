@@ -1,10 +1,11 @@
 // make pure 
-import { ADD_MOVIES ,ADD_FAVOURITES, REMOVE_FAVOURITES } from "../actions";
+import { ADD_MOVIES ,ADD_FAVOURITES, REMOVE_FAVOURITES ,SET_SHOW_FAV } from "../actions";
 
 const initialMovies ={
 
     list:[],
     favourites: [],
+    showFav :false 
 }
 
 
@@ -51,6 +52,12 @@ switch (action.type) {
          return {
         ...state ,
         favourites: [...state.favourites]   // because in action we have set movie and state check in actions
+    }
+       case SET_SHOW_FAV:
+
+         return {
+        ...state ,
+        showFav: action.val   // because in action we have set movie and state check in actions
     }
 
     default:
