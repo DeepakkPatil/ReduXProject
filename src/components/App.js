@@ -56,7 +56,7 @@ onChangeTab=(val)=>{
     const displayMovies= showFav? favourites:list ;
        console.log("render", this.props.store.getState())
     return (<div className="App">
-      <Nav />
+      <Nav dispatch={this.props.store.dispatch} search={search}  />
       <div className="main">
           <div className="tabs">
             <div className={`tab ${ showFav ? '' : 'active-tabs' }`} role='button' onClick={()=>this.onChangeTab(false)} >Movies</div>

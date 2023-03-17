@@ -2,21 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './reducers';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const store =createStore(rootReducer) ; // we pass reducer to store
 
-// console.log("store",store.getState()) // initial state show krega
+//middleware which is exectured bw dispath and reducer , ie as soon as dispatch is called it calls middle ware
+// then middle ware updates action and then agai calls dispatch which sends action to reducer
 
-// store.dispatch({
-//   type: 'ADD_MOVIES', /*  jo reducer m likha h voh action */
-//   movies : [{ 'name' : 'Deepak'}]
-// })
+const logger=({dispatch,getState})=>(next)=>(action)=>{ 
+  console.log('ACTION_TYPE is',action.type)
+  next(action) ;
+  }
 
-// console.log("store",store.getState()) // final state show krega
+// this is a thunk we can use thunk from react-thunk as well by using npm i redux-thunk
+// import thunk from 'redux-thunk'; sirf ye line ayegi 
 
+const thunk=({dispatch,getState})=>(next)=>(action)=>{ 
+  if(typeof action==='function')
+ { action(dispatch)
+    return ;
+  }
+  next(action) ;
+  }
+
+const store =createStore(rootReducer,applyMiddleware(logger,thunk)) ; // we pass reducer to store
 
 root.render(
   <React.StrictMode>

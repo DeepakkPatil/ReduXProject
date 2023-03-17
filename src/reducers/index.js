@@ -1,12 +1,12 @@
 // make pure 
 import { combineReducers } from "redux";
-import { ADD_MOVIES ,ADD_FAVOURITES, REMOVE_FAVOURITES ,SET_SHOW_FAV } from "../actions";
+import { ADD_MOVIES ,ADD_FAVOURITES, REMOVE_FAVOURITES ,SET_SHOW_FAV , ADD_MOVIE_TO_LIST , ADD_SEARCH_RESULT} from "../actions";
 
 const initialMovies ={
 
     list:[],
     favourites: [],
-    showFav :false 
+    showFav :false ,
 }
 
 
@@ -33,22 +33,13 @@ switch (action.type) {
     }
     
     case ADD_FAVOURITES:
-        console.log(state,action) ;
          return {
         ...state ,
         favourites: [action.movie,...state.favourites]   // because in action we have set movie and state check in actions
     }
       case REMOVE_FAVOURITES:
-        console.log(state,action) ;
         const index=state.favourites.indexOf(action.movie) ;
         state.favourites.splice(index,1) ; // means removing one object of index
-
-        // const filteredArray=state.favourites.filter(movie=>movie.Title!==action.movie.Title) ;
-        // return {
-        //      ...state ,
-        // favourites: filteredArray
-        // }
-
 
          return {
         ...state ,
@@ -60,6 +51,12 @@ switch (action.type) {
         ...state ,
         showFav: action.val   // because in action we have set movie and state check in actions
     }
+    case ADD_MOVIE_TO_LIST: // because this will only add the new movie to state
+      return {
+        ...state,
+        list: [action.movie, ...state.list],
+      };
+
 
     default:
         return state;
@@ -68,16 +65,36 @@ switch (action.type) {
 }
 
 // reducer for search
-const initialSearchState = { result: {} };
+const initialSearchState = { 
+    result: {},
+      showSearchResults: false 
+     };
 
 export const search =(state=initialSearchState,action)=>{
 
+switch (action.type) {
+    case ADD_SEARCH_RESULT :
+         return {
+        ...state ,
+        result: action.movie ,
+        showSearchResults: true
+    }
+    case ADD_MOVIE_TO_LIST: // because this will only add the new movie to state
+       
+        return  {
+            ...state ,
+            showSearchResults:false 
+    }
+    
+    default:
+        return state;
+}
 
-return state ;
 }
 
 
-//ROOT REDUCER : ( what we wrote on our own)
+//ROOT REDUCER :
+// 1) ( what we wrote on our own)
 
 // const intialRootState = { 
 //     movies: initialMovies ,
@@ -93,7 +110,7 @@ return state ;
 
 
 
-// Redux provides us with combine Reducer methdo inbuit
+//  2) Redux provides us with combine Reducer methdo inbuit it is a functn :  The combineReducers() function returns a new reducer function that is created by combining the output of multiple reducer functions into a single state object.
 export default combineReducers({
     movies: movies ,
     search: search
