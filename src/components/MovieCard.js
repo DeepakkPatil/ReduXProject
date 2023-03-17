@@ -9,8 +9,6 @@ import { addFavourites, removeFavourites } from '../actions';
   {
     const { movie } =this.props ;
      const { dispatch} = this.props ;
-    console.log(movie)
-    console.log(dispatch)
     dispatch(addFavourites(movie))
   }
 
