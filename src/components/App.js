@@ -3,40 +3,19 @@ import Nav from './Nav'
 import { MovieCard } from './MovieCard';
 import { data} from '../data'
 import { addMovies, setsShowFav } from '../actions';
-import { StoreContext } from '..';
-
+import { connect } from 'react-redux';
 
 
 class App extends React.Component {
 
   componentDidMount(){
 
-    
-    const { store }= this.props ;
-    // make api calls here
-    
-    //subscribe to store :
-    store.subscribe(()=>{
-      console.log("State Updated")
-      this.forceUpdate() ;
-    })
-    
-    // dispatch the action  
-    // store.dispatch({ 
-    //   type: 'ADD_MOVIES', 
-    //   movies: data
-    // })
-
-    // the above method is lame aacha use kro 
-    store.dispatch(addMovies(data)) ;
-
- 
-
+    this.props.dispatch(addMovies(data)) ;
   }
 
   isMovieFav=(movie)=>{
-    const { store }= this.props ;
-    const {movies}= store.getState() ;
+    const { movies }= this.props ;
+ 
     const {favourites} = movies ;
     const index=favourites.indexOf(movie) ;
     if(index===-1)
@@ -45,16 +24,16 @@ class App extends React.Component {
   }
 
 onChangeTab=(val)=>{
-  this.props.store.dispatch(setsShowFav(val))
+  this.props.dispatch(setsShowFav(val))
 }
 
   render (){
 
-    const { movies, search }= this.props.store.getState() ;
+    console.log(this.props)
+    const { movies, search }= this.props ;
     const { list ,favourites ,showFav }= movies ;
 
     const displayMovies= showFav? favourites:list ;
-       console.log("render", this.props.store.getState())
     return (<div className="App">
       <Nav search={search}  />
       <div className="main">
@@ -68,7 +47,7 @@ onChangeTab=(val)=>{
                   <MovieCard 
                   movie={movie} 
                   key={`movie-${index}`} 
-                  dispatch={this.props.store.dispatch } 
+                  dispatch={this.props.dispatch } 
                   isMovieFav={this.isMovieFav(movie)}
                   />
                 )
@@ -83,17 +62,13 @@ onChangeTab=(val)=>{
   }
 }
 
- class  AppWrapper extends React.Component{
+function mapStatetoProps(state){
 
-  render()
-  {
-    return(
-    <StoreContext.Consumer>
-      {
-        (store)=> <App store={store} />
-      }
-    </StoreContext.Consumer>)
+  return {
+    movies: state.movies ,
+    search : state.search
   }
 }
 
-export default AppWrapper;
+const connectedAppComponent = connect(mapStatetoProps)(App) ;
+export default connectedAppComponent ;

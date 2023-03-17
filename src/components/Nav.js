@@ -1,8 +1,6 @@
-
 import React, { Component } from 'react';
-import { StoreContext } from '..';
 import { addMovieToList, handleMovieSearch } from '../actions';
-
+import { connect } from 'react-redux';
 
  class Nav extends Component {
   constructor(props) {
@@ -58,20 +56,26 @@ import { addMovieToList, handleMovieSearch } from '../actions';
   }
 }
 
- class  NavWrapper extends React.Component{
+//  class  NavWrapper extends React.Component{
 
-  render()
-  {
-    return(
-    <StoreContext.Consumer>
+//   render()
+//   {
+//     return(
+//     <StoreContext.Consumer>
       
-      {
-        (store)=>{ 
+//       {
+//         (store)=>{ 
         
-        return<Nav dispatch={store.dispatch} search={ this.props.search} />} // beacuse we have stated props there
-      }
-    </StoreContext.Consumer>)
+//         return<Nav dispatch={store.dispatch} search={ this.props.search} />} // beacuse we have stated props there
+//       }
+//     </StoreContext.Consumer>)
+//   }
+// }
+
+function mapStatetoProps({ search })
+{
+  return {
+    search ,
   }
 }
-
-export default NavWrapper;
+export default connect(mapStatetoProps)(Nav) ;
