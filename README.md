@@ -1,3 +1,4 @@
+[Redux](Redux.md)
 ```
 base directory : /
 build directory : /build
