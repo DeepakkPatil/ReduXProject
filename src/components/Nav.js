@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
+import { StoreContext } from '..';
 import { addMovieToList, handleMovieSearch } from '../actions';
 
 
-export  class Nav extends Component {
+ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +29,7 @@ export  class Nav extends Component {
 
   render() {
     const { showSearchResults, result  } = this.props.search;
-    console.log("props",this.props.result)
+    
     
     return (
       <div className="nav">
@@ -56,3 +57,21 @@ export  class Nav extends Component {
     );
   }
 }
+
+ class  NavWrapper extends React.Component{
+
+  render()
+  {
+    return(
+    <StoreContext.Consumer>
+      
+      {
+        (store)=>{ 
+        
+        return<Nav dispatch={store.dispatch} search={ this.props.search} />} // beacuse we have stated props there
+      }
+    </StoreContext.Consumer>)
+  }
+}
+
+export default NavWrapper;

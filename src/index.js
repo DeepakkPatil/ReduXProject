@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
@@ -28,10 +28,31 @@ const thunk=({dispatch,getState})=>(next)=>(action)=>{
   next(action) ;
   }
 
+ export const StoreContext= createContext() ;
+//  console.log(StoreContext) ; this has Consumer and Provider 
+
+
+
+export class StoreProvider extends React.Component {
+
+  render() {
+    const { store }= this.props ;
+    return (
+      <StoreContext.Provider value={store}>
+        { this.props.children}
+      </StoreContext.Provider>
+    )
+  }
+}
+
+
+
 const store =createStore(rootReducer,applyMiddleware(logger,thunk)) ; // we pass reducer to store
 
 root.render(
   <React.StrictMode>
-    <App store={store} />     {/*  IMP IMP IMP we passed the store as prop to the APP so that we can use it  */}
+    <StoreProvider store={store}>
+    <App  /> 
+    </StoreProvider>
   </React.StrictMode>
 );

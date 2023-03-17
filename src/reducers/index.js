@@ -41,6 +41,7 @@ switch (action.type) {
         const index=state.favourites.indexOf(action.movie) ;
         state.favourites.splice(index,1) ; // means removing one object of index
 
+   
          return {
         ...state ,
         favourites: [...state.favourites]   // because in action we have set movie and state check in actions

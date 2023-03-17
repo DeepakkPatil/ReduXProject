@@ -1,9 +1,9 @@
 import React from 'react';
-import {  Nav} from './Nav';
+import Nav from './Nav'
 import { MovieCard } from './MovieCard';
 import { data} from '../data'
 import { addMovies, setsShowFav } from '../actions';
-
+import { StoreContext } from '..';
 
 
 
@@ -56,7 +56,7 @@ onChangeTab=(val)=>{
     const displayMovies= showFav? favourites:list ;
        console.log("render", this.props.store.getState())
     return (<div className="App">
-      <Nav dispatch={this.props.store.dispatch} search={search}  />
+      <Nav search={search}  />
       <div className="main">
           <div className="tabs">
             <div className={`tab ${ showFav ? '' : 'active-tabs' }`} role='button' onClick={()=>this.onChangeTab(false)} >Movies</div>
@@ -83,4 +83,17 @@ onChangeTab=(val)=>{
   }
 }
 
-export default App;
+ class  AppWrapper extends React.Component{
+
+  render()
+  {
+    return(
+    <StoreContext.Consumer>
+      {
+        (store)=> <App store={store} />
+      }
+    </StoreContext.Consumer>)
+  }
+}
+
+export default AppWrapper;
