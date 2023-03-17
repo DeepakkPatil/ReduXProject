@@ -1,4 +1,4 @@
-[Redux](Redux.md)
+[Context_inRedux](Context_inRedux.md)
 ```
 base directory : /
 build directory : /build
