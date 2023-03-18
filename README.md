@@ -1,4 +1,6 @@
-[Context_inRedux](Context_inRedux.md)
+[Context_inRedux](Context_inRedux.md) <br/>
+[React-Redux](React-Redux.md)
+
 ```
 base directory : /
 build directory : /build
