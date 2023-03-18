@@ -31,12 +31,14 @@ import { connect } from 'react-redux';
     
     return (
       <div className="nav">
+         <img src='https://i.ibb.co/TgbrjTg/translogo-Dark.png' className='logo'/>
         <div className="search-container">
-          <input onChange={this.handleSearchChange} />
+          <div className='searchField'>
+          <input onChange={this.handleSearchChange} placeholder='search movie...' />
           <button id="search-btn" onClick={this.handleSearchClick}>
             Search
           </button>
-
+          </div>
           {showSearchResults && (
             <div className="search-results">
               <div className="search-result">
