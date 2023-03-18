@@ -14,15 +14,23 @@ import { connect } from 'react-redux';
     this.props.dispatch(addMovieToList(movie));
   };
 
-  handleSearchClick = () => {
+  handleSearchClick = (e) => {
+  
     const { searchText } = this.state;
+    if(searchText.length>3)
     this.props.dispatch(handleMovieSearch(searchText));
+  
   };
 
   handleSearchChange = (e) => {
+    
+    
     this.setState({
       searchText: e.target.value,
     });
+
+    
+    
   };
 
   render() {
@@ -34,7 +42,10 @@ import { connect } from 'react-redux';
          <img src='https://i.ibb.co/TgbrjTg/translogo-Dark.png' className='logo'/>
         <div className="search-container">
           <div className='searchField'>
-          <input onChange={this.handleSearchChange} placeholder='search movie...' />
+          <input 
+          onChange={this.handleSearchChange}  
+          onKeyDown={ this.handleSearchClick}
+            placeholder='search movie...' />
           <button id="search-btn" onClick={this.handleSearchClick}>
             Search
           </button>
@@ -45,10 +56,13 @@ import { connect } from 'react-redux';
                 <img src={result.Poster} alt="search-pic" />
                 <div className="movie-info">
                   <span>{result.Title}</span>
-                  <button onClick={() => this.handleAddToMovies(result)}>
+                  </div>
+                  <div className='content'>
+                  <span>{result.Plot}</span>
+                </div>
+                 <button onClick={() => this.handleAddToMovies(result)}>
                     Add to Movies
                   </button>
-                </div>
               </div>
             </div>
           )}
