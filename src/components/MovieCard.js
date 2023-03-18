@@ -24,12 +24,15 @@ import { addFavourites, removeFavourites } from '../actions';
     const { movie , isMovieFav} = this.props ; 
     return (
       <div className='movie-card'>
+        <div className='content'>
         <div className='left'>   
             <img alt='movie' src={movie.Poster}/>     
         </div>
         <div className='right'>    
         <div className='title'>{ movie.Title }</div>
         <div className='plot'>{ movie.Plot }</div>
+        </div>
+        </div>
         <div className='footer'>
                 <div className='rating'>
                         { movie.imdbRating}⭐
@@ -41,7 +44,6 @@ import { addFavourites, removeFavourites } from '../actions';
       
                 }
                   </div>
-        </div>
       </div>
     )
   }
