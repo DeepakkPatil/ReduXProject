@@ -1,8 +1,6 @@
-
 import React, { Component } from 'react';
-import { StoreContext } from '..';
 import { addMovieToList, handleMovieSearch } from '../actions';
-
+import { connect } from 'react-redux';
 
  class Nav extends Component {
   constructor(props) {
@@ -33,12 +31,14 @@ import { addMovieToList, handleMovieSearch } from '../actions';
     
     return (
       <div className="nav">
+         <img src='https://i.ibb.co/TgbrjTg/translogo-Dark.png' className='logo'/>
         <div className="search-container">
-          <input onChange={this.handleSearchChange} />
+          <div className='searchField'>
+          <input onChange={this.handleSearchChange} placeholder='search movie...' />
           <button id="search-btn" onClick={this.handleSearchClick}>
             Search
           </button>
-
+          </div>
           {showSearchResults && (
             <div className="search-results">
               <div className="search-result">
@@ -58,20 +58,26 @@ import { addMovieToList, handleMovieSearch } from '../actions';
   }
 }
 
- class  NavWrapper extends React.Component{
+//  class  NavWrapper extends React.Component{
 
-  render()
-  {
-    return(
-    <StoreContext.Consumer>
+//   render()
+//   {
+//     return(
+//     <StoreContext.Consumer>
       
-      {
-        (store)=>{ 
+//       {
+//         (store)=>{ 
         
-        return<Nav dispatch={store.dispatch} search={ this.props.search} />} // beacuse we have stated props there
-      }
-    </StoreContext.Consumer>)
+//         return<Nav dispatch={store.dispatch} search={ this.props.search} />} // beacuse we have stated props there
+//       }
+//     </StoreContext.Consumer>)
+//   }
+// }
+
+function mapStatetoProps({ search })
+{
+  return {
+    search ,
   }
 }
-
-export default NavWrapper;
+export default connect(mapStatetoProps)(Nav) ;

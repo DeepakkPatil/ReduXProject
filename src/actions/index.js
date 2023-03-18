@@ -55,8 +55,7 @@ export function addMovieToList(movie) {
 //   const m = await response.json() ;
 //   console.log(m) ;
 
-
-    // we need to dispatch an action 
+ // we need to dispatch an action 
 
     return function(dispatch)
     {

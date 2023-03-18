@@ -32,7 +32,7 @@ import { addFavourites, removeFavourites } from '../actions';
         <div className='plot'>{ movie.Plot }</div>
         <div className='footer'>
                 <div className='rating'>
-                        { movie.imdbRating}
+                        { movie.imdbRating}⭐
                 </div>
                 {
                   isMovieFav ? (<button className='unfavourite-btn' onClick={this.removeFav}>Remove from Favourite</button>):
