@@ -4,7 +4,7 @@
 
 ![image](https://github.com/DeepakkPatil/ReduXProject/assets/108725514/77923ab9-858e-49ce-95ba-bfec48c1555f)
 
-# My Favorite Movies App
+# My Favorite Movies App:
 
 Welcome to **My Favorite Movies App**! This is a React and Redux-based web application that allows you to keep track of your favorite movies and easily manage your collection. With this app, you can add movies to your favorites list, view detailed information about each movie, and remove them from your collection when desired.
 
